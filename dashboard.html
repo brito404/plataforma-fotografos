@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhotoFrame - Painel do Fotógrafo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- BARRA LATERAL (SIDEBAR) -->
+    <aside class="sidebar">
+        <h1 class="logo"><a href="index.html">PHOTOFRAME</a></h1>
+        <nav class="sidebar-nav">
+            <a href="index.html"><span class="icon">🏠</span> Início</a>
+            <a href="perfil.html"><span class="icon">🖼️</span> Portfólio</a>
+            <a href="dashboard.html" class="active"><span class="icon">👤</span> Meu Perfil</a>
+            <a href="#"><span class="icon">⚙️</span> Configurações</a>
+            <a href="index.html" class="logout"><span class="icon">🚪</span> Sair</a>
+        </nav>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL (DASHBOARD) -->
+    <div class="dashboard-container">
+        
+        <!-- PAINEL CENTRAL (MÉTRICAS E GALERIA) -->
+        <main class="dashboard-main">
+            
+            <!-- HEADER DO PERFIL -->
+            <section class="profile-header-card">
+                <div class="avatar-container">
+                    <image src="images/portrait1.jpg" alt="Foto de Perfil" class="avatar-img">
+                    <div class="avatar-overlay">
+                        <div class="btn-change-photo">
+                            <span class="icon">📷</span>
+                            <span>Alterar foto</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-header-info">
+                    <h2>João Silva</h2>
+                    <p class="role">Fotógrafo documental</p>
+                    <p class="location">São Paulo, Brasil</p>
+                    <p class="bio-summary">
+                        Acredito que cada imagem carrega uma história que merece ser contada. 
+                        Meu trabalho é registrar momentos reais, pessoas e lugares de forma autêntica e sensível.
+                    </p>
+                    <button class="btn-edit-profile">✏️ Editar perfil</button>
+                </div>
+            </section>
+
+            <!-- SEÇÃO DE GESTÃO DO PORTFÓLIO -->
+            <section class="portfolio-manager">
+                <div class="portfolio-actions-header">
+                    <button class="btn-add-photos">☁️ Adicionar fotos</button>
+                </div>
+
+                <div class="dashboard-photo-grid">
+                    <div class="dash-photo-item">
+                        <img src="images/arquitetura.png" alt="Foto 1">
+                        <button class="btn-delete-photo" title="Excluir foto">🗑️</button>
+                    </div>
+                    <div class="dash-photo-item">
+                        <img src="images/paisagem2.png" alt="Foto 2">
+                        <button class="btn-delete-photo" title="Excluir foto">🗑️</button>
+                    </div>
+                    <div class="dash-photo-item">
+                        <img src="images/saopaulo3.png" alt="Foto 3">
+                        <button class="btn-delete-photo" title="Excluir foto">🗑️</button>
+                    </div>
+                    <div class="dash-photo-item">
+                        <img src="images/documental3.png" alt="Foto 4">
+                        <button class="btn-delete-photo" title="Excluir foto">🗑️</button>
+                    </div>
+                    <div class="dash-photo-item">
+                        <img src="images/saopaulo5.png" alt="Foto 5">
+                        <button class="btn-delete-photo" title="Excluir foto">🗑️</button>
+                    </div>
+                    <div class="dash-photo-item">
+                        <img src="images/saopaulo6.png" alt="Foto 6">
+                        <button class="btn-delete-photo" title="Excluir foto">🗑️</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- PAINEL LATERAL DIREITO (MODAL DE EDIÇÃO) -->
+        <aside class="edit-profile-modal">
+            <h3>Editar Perfil</h3>
+            
+            <form class="edit-form">
+                <div class="form-group">
+                    <label for="fullname">Nome completo *</label>
+                    <input type="text" id="fullname" value="João Silva">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Categoria Principal *</label>
+                    <select id="category">
+                        <option value="documental">Fotógrafo documental</option>
+                        <option value="retrato">Retrato</option>
+                        <option value="paisagem">Paisagem</option>
+                        <option value="arquitetura">Arquitetura</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefone / WhatsApp *</label>
+                    <input type="text" id="phone" value="(11) 98765-4321">
+                </div>
+
+                <div class="form-group">
+                    <label for="bio">Biografia *</label>
+                    <textarea id="bio" rows="5">Acredito que cada imagem carrega uma história que merece ser contada. Meu trabalho é registrar momentos reais, pessoas e lugares de forma autêntica e sensível.</textarea>
+                    <span class="char-count">168/500</span>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="button" class="btn-cancel">Cancelar</button>
+                    <button type="submit" class="btn-save">Salvar</button>
+                </div>
+            </form>
+        </aside>
+
+    </div>
+
+</body>
+</html>
