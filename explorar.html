@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhotoFrame - Explorar</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Photoframe — Plataforma de portfólio e exibição para fotógrafos autorais.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -13,7 +17,7 @@
         <div class="logo"><a href="index.html">PHOTOFRAME</a></div>
         <nav class="nav-links">
             <a href="index.html">Início</a>
-            <a href="explorar.html" class="active">Explorar</a>
+            <a href="explorar.html" class="active" aria-current="page">Explorar</a>
             <a href="dashboard.html">Meu Perfil</a>
         </nav>
     </header>
@@ -25,7 +29,7 @@
                 <h2>Fotógrafos em destaque</h2>
                 <p>Conheça diferentes fotógrafos, estilos e histórias através da fotografia.</p>
             </div>
-            <div class="filter-pills">
+            <div class="filter-pills" role="group" aria-label="Filtrar fotógrafos por categoria">
                 <button class="pill active">Todos</button>
                 <button class="pill">Retrato</button>
                 <button class="pill">Paisagem</button>
@@ -36,19 +40,19 @@
         <!-- GRELHA DE FOTÓGRAFOS -->
         <section class="photographers-grid">
             <div class="card">
-                <img src="images/fotopaulo4.png" alt="Paulo Giovanni">
+                <img src="images/fotopaulo4.png" alt="Retrato artístico fotografado por Paulo Giovanni">
                 <h3>Paulo Giovanni</h3>
                 <p class="category">Retratos</p>
                 <a href="perfil.html" class="link-portfolio">Ver Portfólio</a>
             </div>
             <div class="card">
-                <img src="images/paisagem.png" alt="Ana Costa">
+                <img src="images/paisagem.png" alt="Fotografia de paisagem natural por Ana Costa">
                 <h3>Ana Costa</h3>
-                <p class="category">Natureza</p>
+                <p class="category">Paisagem</p>
                 <a href="perfil.html" class="link-portfolio">Ver Portfólio</a>
             </div>
             <div class="card">
-                <img src="images/arquitetura.png" alt="Lucas Ferreira">
+                <img src="images/arquitetura.png" alt="Fotografia de arquitetura contemporânea por Lucas Ferreira">
                 <h3>Lucas Ferreira</h3>
                 <p class="category">Arquitetura</p>
                 <a href="perfil.html" class="link-portfolio">Ver Portfólio</a>
@@ -64,6 +68,8 @@
         <span>PHOTOFRAME</span>
         <span>&copy; 2026 PhotoFrame. Todos os direitos reservados.</span>
     </footer>
+
+    <script src="js/script.js"></script>
 
 </body>
 </html>
