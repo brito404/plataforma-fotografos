@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhotoFrame - Início</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Photoframe — Plataforma de portfólio e exibição para fotógrafos autorais.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="home-layout">
 
     <!-- MENU LATERAL (SIDEBAR) -->
     <aside class="sidebar">
-        <h1 class="logo">PHOTOFRAME</h1>
-        <nav class="sidebar-nav">
-            <a href="index.html" class="active"><span class="icon">🏠</span> Início</a>
-            <a href="explorar.html"><span class="icon">🧭</span> Explorar</a>
-            <a href="dashboard.html"><span class="icon">👤</span> Meu Perfil</a>
-        </nav>
-    </aside>
+  <div class="logo">
+    <a href="index.html">PHOTOFRAME</a>
+  </div>
+  <nav class="sidebar-nav" aria-label="Menu principal">
+    <a href="index.html" class="active" aria-current="page">Início</a>
+    <a href="explorar.html">Explorar</a>
+    <a href="perfil.html">Perfil</a>
+    <a href="dashboard.html">Dashboard</a>
+  </nav>
+</aside>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="home-hero">
@@ -27,9 +34,11 @@
             <a href="explorar.html" class="btn-primary">Explorar fotógrafos</a>
         </div>
         <div class="hero-image">
-           <img src="images/fotografo.png" alt="Fotografia de exibição">
+           <img src="images/fotografo.png" alt="Fotógrafo segurando câmera profissional em estúdio minimalista">
         </div>
     </main>
+
+    <script src="js/script.js"></script>
 
 </body>
 </html>
