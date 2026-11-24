@@ -1,18 +1,33 @@
 /* ==========================================
-   1. RESET GLOBAL E ESTRUTURA
+   1. VARIÁVEIS, RESET GLOBAL E ESTRUTURA
    ========================================== */
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #666666;
+  --border: #eeeeee;
+  --dark: #0f0f0f;
+  --radius: 6px;
+  --whatsapp: #25d366;
+  --focus: #2563eb;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body {
+html {
+  width: 100%;
+}
+
+body {
   width: 100%;
   min-height: 100vh;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #ffffff;
-  color: #111111;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 img {
@@ -26,8 +41,54 @@ a {
   color: inherit;
 }
 
+button {
+  font-family: inherit;
+}
+
+/* Atributo hidden sempre vence (mesmo em elementos com display definido) */
+[hidden] {
+  display: none !important;
+}
+
+/* Foco visível para navegação por teclado */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Páginas com rodapé: o rodapé fica sempre no fim da tela */
+body.page {
+  display: flex;
+  flex-direction: column;
+}
+
+body.page main {
+  flex: 1;
+  width: 100%;
+}
+
+/* Texto só para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.empty-state {
+  color: var(--muted);
+  text-align: center;
+  padding: 40px 0;
+}
+
+.empty-state.dark-text {
+  padding: 24px 0;
+}
+
 /* ==========================================
-   2. NAVBAR PADAO (explorar.html, perfil.html, galeria.html)
+   2. NAVBAR PADRÃO (explorar, perfil, galeria)
    ========================================== */
 header.navbar {
   display: flex;
@@ -35,7 +96,7 @@ header.navbar {
   align-items: center;
   padding: 20px 60px;
   background-color: #ffffff;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid var(--border);
 }
 
 header.navbar-dark {
@@ -78,22 +139,21 @@ header.navbar-dark .nav-links a.active {
 }
 
 /* ==========================================
-   3. HOME / INÍCIO (index.html) - TRAVADA SEM SCROLL
+   3. HOME / INÍCIO (index.html)
    ========================================== */
-body.home-layout,
-.home-layout {
+body.home-layout {
   display: flex;
-  width: 100vw;
   height: 100vh;
-  max-height: 100vh;
-  overflow: hidden; /* Trava scroll na Home */
+  height: 100dvh;
+  overflow: hidden; /* trava o scroll na Home (somente no desktop) */
 }
 
-/* Sidebar Esquerda */
+/* Sidebar esquerda (usada na Home e no Dashboard) */
 .sidebar {
   width: 260px;
   height: 100vh;
-  background-color: #0f0f0f;
+  height: 100dvh;
+  background-color: var(--dark);
   color: #ffffff;
   padding: 40px 24px;
   display: flex;
@@ -120,6 +180,7 @@ body.home-layout,
   align-items: center;
   gap: 12px;
   font-weight: 500;
+  transition: color 0.2s;
 }
 
 .sidebar-nav a:hover,
@@ -127,13 +188,28 @@ body.home-layout,
   color: #ffffff;
 }
 
-/* Hero Section */
+.sidebar-nav a.logout {
+  margin-top: 12px;
+  color: #c97a7a;
+}
+
+.sidebar-nav a.logout:hover {
+  color: #ff9d9d;
+}
+
+.sidebar-nav .icon {
+  width: 1.4em;
+  text-align: center;
+}
+
+/* Hero */
 .home-hero {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100vh;
+  height: 100%;
+  min-width: 0;
 }
 
 .hero-content {
@@ -173,14 +249,20 @@ body.home-layout,
   background-color: #222222;
   color: #ffffff;
   padding: 14px 28px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-weight: 600;
   font-size: 0.95rem;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #000000;
+  transform: translateY(-1px);
 }
 
 .hero-image {
   width: 50%;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -199,37 +281,69 @@ main.container {
   padding: 40px 60px 80px 60px;
 }
 
+main.container h2 {
+  font-size: 1.5rem;
+}
+
 .explore-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  gap: 24px;
   margin-bottom: 40px;
 }
 
-.explore-header h2 {
+.explore-header h1 {
   font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
 .explore-header p {
-  color: #666666;
+  color: var(--muted);
+}
+
+.explore-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.search-input {
+  padding: 8px 16px;
+  border: 1px solid #dddddd;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  width: 220px;
+  font-family: inherit;
+}
+
+.search-input:focus {
+  border-color: var(--focus);
 }
 
 .filter-pills {
   display: flex;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.button.pill,
 .pill {
   padding: 8px 20px;
   border: none;
   background: transparent;
   border-radius: 20px;
   font-weight: 500;
+  font-size: 0.9rem;
   cursor: pointer;
   color: #555555;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.pill:hover {
+  background-color: #f0f0f0;
 }
 
 .pill.active {
@@ -237,7 +351,7 @@ main.container {
   color: #ffffff;
 }
 
-/* Grid de Fotógrafos */
+/* Grid de fotógrafos */
 .photographers-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -253,9 +367,15 @@ main.container {
 
 .photographers-grid .card img {
   width: 100%;
-  height: 380px; /* Proporção das fotos */
+  height: 380px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: var(--radius);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.photographers-grid .card:hover img {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
 .photographers-grid .card h3 {
@@ -264,7 +384,7 @@ main.container {
 }
 
 .photographers-grid .card .category {
-  color: #666666;
+  color: var(--muted);
   font-size: 0.95rem;
 }
 
@@ -272,6 +392,12 @@ main.container {
   font-weight: 600;
   font-size: 0.9rem;
   color: #111111;
+  align-self: flex-start;
+  border-bottom: 1px solid transparent;
+}
+
+.photographers-grid .card .link-portfolio:hover {
+  border-bottom-color: #111111;
 }
 
 .load-more {
@@ -283,9 +409,15 @@ main.container {
   background: transparent;
   border: 1px solid #111111;
   padding: 12px 32px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-weight: 700;
   cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-outline:hover {
+  background-color: #111111;
+  color: #ffffff;
 }
 
 /* ==========================================
@@ -302,6 +434,11 @@ main.container {
   font-size: 0.9rem;
   display: inline-block;
   margin-bottom: 24px;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #ffffff;
 }
 
 .profile-container {
@@ -316,15 +453,16 @@ main.container {
   flex-shrink: 0;
   border-radius: 8px;
   overflow: hidden;
+  background-color: #1a1a1a;
 }
 
 .profile-avatar img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
-.profile-info h2 {
+.profile-info h1 {
   font-size: 2.2rem;
   margin-bottom: 4px;
 }
@@ -348,18 +486,55 @@ main.container {
   margin-bottom: 20px;
 }
 
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
 .btn-whatsapp {
-  background-color: #25d366;
+  background-color: var(--whatsapp);
   color: #ffffff;
   padding: 10px 20px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  transition: filter 0.2s;
 }
 
-/* Grid do Portfólio */
+.btn-whatsapp:hover {
+  filter: brightness(0.92);
+}
+
+.btn-manage {
+  background-color: #333333;
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.btn-manage:hover {
+  background-color: #4a4a4a;
+}
+
+.not-found {
+  color: #cccccc;
+}
+
+.not-found a {
+  text-decoration: underline;
+}
+
+/* Grid do portfólio */
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -367,49 +542,55 @@ main.container {
   margin-top: 24px;
 }
 
+.portfolio-grid a {
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
 .portfolio-grid img {
   width: 100%;
   height: 280px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: var(--radius);
+  transition: transform 0.3s;
+}
+
+.portfolio-grid a:hover img {
+  transform: scale(1.04);
 }
 
 /* ==========================================
-   6. DASHBOARD (dashboard.html) - SEM SCROLL EXTERNO
-   ========================================== */
-/* ==========================================
-   6. DASHBOARD (dashboard.html) - AJUSTADO E ORGANIZADO
+   6. DASHBOARD (dashboard.html)
    ========================================== */
 body.dashboard-body {
   display: flex;
-  width: 100vw;
   height: 100vh;
+  height: 100dvh;
   background-color: #121212;
   color: #ffffff;
   overflow: hidden;
 }
 
 .dashboard-container {
+  flex: 1;
+  min-width: 0;
   display: flex;
-  width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
-/* Área principal */
+/* Área principal: os dois cartões brancos empilhados */
 .dashboard-main {
   flex: 1;
+  min-width: 0;
   padding: 40px;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 32px;
-  max-width: 1400px;
-  margin: 0 auto;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   overflow-y: auto;
-  box-sizing: border-box;
 }
 
-/* Cartão Branco Principal que agrupa o Perfil e as Fotos */
+/* Cartão do perfil */
 .profile-header-card {
   background-color: #ffffff;
   color: #111111;
@@ -418,7 +599,6 @@ body.dashboard-body {
   display: flex;
   gap: 24px;
   align-items: center;
-  margin-bottom: 24px;
 }
 
 .avatar-container {
@@ -428,6 +608,7 @@ body.dashboard-body {
   border-radius: 8px;
   overflow: hidden;
   flex-shrink: 0;
+  background-color: #e5e5e5;
 }
 
 .avatar-img {
@@ -439,7 +620,9 @@ body.dashboard-body {
 .avatar-overlay {
   position: absolute;
   inset: 0;
+  width: 100%;
   background: rgba(0, 0, 0, 0.6);
+  border: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -449,9 +632,24 @@ body.dashboard-body {
   cursor: pointer;
   text-align: center;
   padding: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
-.profile-header-info h2 {
+.avatar-container:hover .avatar-overlay,
+.avatar-overlay:focus-visible {
+  opacity: 1;
+}
+
+/* Em telas de toque não existe hover: mantém o botão sempre visível */
+@media (hover: none) {
+  .avatar-overlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.45);
+  }
+}
+
+.profile-header-info h1 {
   font-size: 1.8rem;
   margin-bottom: 4px;
 }
@@ -479,13 +677,18 @@ body.dashboard-body {
   color: #ffffff;
   border: none;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-weight: 600;
   font-size: 0.85rem;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-/* Gestão de Fotos */
+.btn-edit-profile:hover {
+  background-color: #333333;
+}
+
+/* Gestão de fotos */
 .portfolio-manager {
   background-color: #ffffff;
   color: #111111;
@@ -494,7 +697,22 @@ body.dashboard-body {
 }
 
 .portfolio-actions-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 20px;
+}
+
+.portfolio-actions-header h2 {
+  font-size: 1.2rem;
+}
+
+.photo-count {
+  color: #888888;
+  font-weight: 400;
+  font-size: 0.9rem;
 }
 
 .btn-add-photos {
@@ -502,10 +720,15 @@ body.dashboard-body {
   color: #ffffff;
   border: none;
   padding: 10px 20px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-add-photos:hover {
+  background-color: #333333;
 }
 
 .dashboard-photo-grid {
@@ -519,6 +742,7 @@ body.dashboard-body {
   height: 180px;
   border-radius: 8px;
   overflow: hidden;
+  background-color: #eeeeee;
 }
 
 .dash-photo-item img {
@@ -537,17 +761,27 @@ body.dashboard-body {
   padding: 6px 8px;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-/* Painel de Edição Lateral (Dark) */
+.btn-delete-photo:hover {
+  background: #b91c1c;
+}
+
+/* Painel de edição lateral (escuro) */
 .edit-profile-modal {
+  width: 340px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  max-height: calc(100% - 80px);
+  overflow-y: auto;
+  margin: 40px 40px 40px 0;
   background-color: #1e1e1e;
   border-radius: 12px;
   padding: 32px;
-  height: fit-content;
 }
 
-.edit-profile-modal h3 {
+.edit-profile-modal h2 {
   font-size: 1.3rem;
   margin-bottom: 20px;
 }
@@ -571,9 +805,14 @@ body.dashboard-body {
   border: 1px solid #333333;
   color: #ffffff;
   padding: 10px 12px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-family: inherit;
-  box-sizing: border-box;
+  font-size: 0.95rem;
+}
+
+.edit-form input:invalid:not(:placeholder-shown),
+.edit-form textarea:invalid:not(:placeholder-shown) {
+  border-color: #b91c1c;
 }
 
 .edit-form textarea {
@@ -584,7 +823,7 @@ body.dashboard-body {
   display: block;
   text-align: right;
   font-size: 0.75rem;
-  color: #666666;
+  color: #888888;
   margin-top: 4px;
 }
 
@@ -600,9 +839,13 @@ body.dashboard-body {
   border: 1px solid #444444;
   color: #ffffff;
   padding: 10px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-weight: 600;
   cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background-color: #2a2a2a;
 }
 
 .btn-save {
@@ -611,9 +854,13 @@ body.dashboard-body {
   border: none;
   color: #111111;
   padding: 10px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-weight: 700;
   cursor: pointer;
+}
+
+.btn-save:hover {
+  background-color: #e0e0e0;
 }
 
 /* ==========================================
@@ -623,9 +870,9 @@ body.bg-black-view {
   background-color: #000000;
   color: #ffffff;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   overflow: hidden;
 }
 
@@ -635,6 +882,13 @@ body.bg-black-view {
   justify-content: center;
   gap: 40px;
   flex: 1;
+  min-height: 0;
+}
+
+.main-image-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-image-view img {
@@ -649,8 +903,14 @@ body.bg-black-view {
   color: #ffffff;
   width: 48px;
   height: 48px;
+  flex-shrink: 0;
   cursor: pointer;
   font-size: 1.2rem;
+  transition: background-color 0.2s;
+}
+
+.nav-arrow:hover {
+  background-color: #222222;
 }
 
 .thumbnails-bar {
@@ -660,27 +920,55 @@ body.bg-black-view {
 
 .thumbs {
   display: flex;
-  justify-content: center;
   gap: 16px;
   margin-bottom: 8px;
+  padding: 4px;
+  overflow-x: auto;
 }
 
-.thumbs img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
+/* Centraliza quando cabe e permite rolar quando há muitas miniaturas */
+.thumbs .thumb:first-child {
+  margin-left: auto;
+}
+
+.thumbs .thumb:last-child {
+  margin-right: auto;
+}
+
+.thumb {
+  flex-shrink: 0;
+  padding: 0;
+  background: none;
+  border: 2px solid transparent;
   border-radius: 4px;
   opacity: 0.5;
   cursor: pointer;
+  transition: opacity 0.2s;
 }
 
-.thumbs img.active-thumb {
+.thumb:hover {
+  opacity: 0.8;
+}
+
+.thumb img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.thumb.active-thumb {
   opacity: 1;
-  border: 2px solid #ffffff;
+  border-color: #ffffff;
+}
+
+.counter {
+  font-size: 0.85rem;
+  color: #aaaaaa;
 }
 
 /* ==========================================
-   8. RODAPÉ FIXO (footer)
+   8. RODAPÉ
    ========================================== */
 footer {
   background-color: #0d0d0d;
@@ -689,5 +977,241 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   font-size: 0.85rem;
+}
+
+/* ==========================================
+   9. MENSAGEM TEMPORÁRIA (TOAST)
+   ========================================== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 20px);
+  background-color: #ffffff;
+  color: #111111;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 100;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ==========================================
+   10. RESPONSIVIDADE
+   ========================================== */
+
+/* Painel de edição vira gaveta sobre o conteúdo */
+@media (max-width: 1100px) {
+  .edit-profile-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(380px, 100%);
+    max-height: none;
+    margin: 0;
+    border-radius: 0;
+    z-index: 50;
+    box-shadow: -12px 0 32px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@media (max-width: 900px) {
+  /* Home e Dashboard deixam de travar a altura */
+  body.home-layout,
+  body.dashboard-body {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+  }
+
+  /* Sidebar vira barra superior */
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 16px 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .sidebar .logo {
+    margin-bottom: 0;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+  }
+
+  .sidebar-nav a.logout {
+    margin-top: 0;
+  }
+
+  /* Home */
+  .home-hero {
+    flex-direction: column-reverse;
+    height: auto;
+    align-items: stretch;
+  }
+
+  .hero-content {
+    max-width: none;
+    padding: 32px 24px 48px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 300px;
+  }
+
+  /* Navbar e rodapé */
+  header.navbar {
+    padding: 16px 20px;
+  }
+
+  footer {
+    padding: 20px;
+  }
+
+  /* Explorar */
+  main.container {
+    padding: 32px 20px 60px;
+  }
+
+  .explore-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .explore-controls {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .photographers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .photographers-grid .card img {
+    height: 300px;
+  }
+
+  /* Perfil */
+  .profile-hero {
+    padding: 40px 20px;
+  }
+
+  .profile-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Dashboard */
+  .dashboard-container {
+    height: auto;
+  }
+
+  .dashboard-main {
+    padding: 20px;
+    overflow: visible;
+  }
+
+  .profile-header-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+  }
+
+  .portfolio-manager {
+    padding: 24px;
+  }
+
+  .dashboard-photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Galeria */
+  .lightbox-container {
+    gap: 8px;
+    padding: 0 8px;
+  }
+
+  .main-image-view img {
+    max-width: calc(100vw - 120px);
+  }
+
+  .nav-arrow {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .photographers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photographers-grid .card img {
+    height: 340px;
+  }
+
+  .portfolio-grid img {
+    height: 200px;
+  }
+
+  .dash-photo-item {
+    height: 140px;
+  }
+
+  header .nav-links {
+    gap: 14px;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .thumb img {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Respeita quem prefere menos animações */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }

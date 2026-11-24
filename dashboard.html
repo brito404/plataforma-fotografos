@@ -4,134 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhotoFrame - Painel do Fotógrafo</title>
-    <meta name="description" content="Photoframe — Plataforma de portfólio e exibição para fotógrafos autorais.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-    
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📷%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
 </head>
-<body class="dashboard-body">
+<body class="dashboard-body" data-page="dashboard">
 
     <!-- BARRA LATERAL (SIDEBAR) -->
     <aside class="sidebar">
         <div class="logo"><a href="index.html">PHOTOFRAME</a></div>
-        <nav class="sidebar-nav" aria-label="Menu do painel"></nav>
-            <a href="index.html"><span class="icon">🏠</span> Início</a>
-            <a href="perfil.html"><span class="icon">🖼️</span> Portfólio</a>
+        <nav class="sidebar-nav" aria-label="Menu principal">
+            <a href="index.html"><span class="icon" aria-hidden="true">🏠</span> Início</a>
+            <a href="explorar.html"><span class="icon" aria-hidden="true">🧭</span> Explorar</a>
+            <a href="perfil.html?id=1"><span class="icon" aria-hidden="true">🖼️</span> Meu Portfólio</a>
             <a href="dashboard.html" class="active" aria-current="page"><span class="icon" aria-hidden="true">👤</span> Meu Perfil</a>
-            <a href="#"><span class="icon">⚙️</span> Configurações</a>
-            <a href="index.html" class="logout"><span class="icon">🚪</span> Sair</a>
+            <a href="index.html" class="logout"><span class="icon" aria-hidden="true">🚪</span> Sair</a>
         </nav>
     </aside>
 
     <!-- CONTEÚDO PRINCIPAL (DASHBOARD) -->
     <div class="dashboard-container">
-        
-        <!-- PAINEL CENTRAL (MÉTRICAS E GALERIA) -->
+
         <main class="dashboard-main">
-            
+
             <!-- HEADER DO PERFIL -->
             <section class="profile-header-card">
                 <div class="avatar-container">
-                    <img src="images/portrait1.jpg" alt="Foto de perfil de Paulo Giovanni" class="avatar-img">
-                    <button type="button" class="avatar-overlay" aria-label="Alterar foto de perfil">
-                        <div class="btn-change-photo">
-                            <span class="icon">📷</span>
-                            <span>Alterar foto</span>
-                        </div>
-                    </div>
+                    <img id="avatar-img" class="avatar-img" src="images/logoperfil.png" alt="Foto de perfil">
+                    <button type="button" class="avatar-overlay" id="avatar-btn" aria-label="Alterar foto de perfil">
+                        <span class="icon" aria-hidden="true">📷</span>
+                        <span>Alterar foto</span>
+                    </button>
+                    <input type="file" id="avatar-input" accept="image/*" hidden>
                 </div>
 
                 <div class="profile-header-info">
-                    <h2>Paulo Giovanni</h2>
-                    <p class="role">Fotógrafo documental</p>
+                    <h1 id="dash-name">Paulo Giovanni</h1>
+                    <p class="role" id="dash-role">Fotógrafo documental</p>
                     <p class="location">São Paulo, Brasil</p>
-                    <p class="bio-summary">
-                        Acredito que cada imagem carrega uma história que merece ser contada. 
-                        Meu trabalho é registrar momentos reais, pessoas e lugares de forma autêntica e sensível.
-                    </p>
-                    <button type="button" class="btn-edit-profile"><span aria-hidden="true">✏️</span> Editar perfil</button>
+                    <p class="bio-summary" id="dash-bio"></p>
+                    <button type="button" class="btn-edit-profile" id="edit-btn">✏️ Editar perfil</button>
                 </div>
             </section>
 
             <!-- SEÇÃO DE GESTÃO DO PORTFÓLIO -->
             <section class="portfolio-manager">
                 <div class="portfolio-actions-header">
-                    <button type="button" class="btn-add-photos"><span aria-hidden="true">☁️</span> Adicionar fotos</button>
+                    <h2>Meu portfólio <span class="photo-count" id="photo-count"></span></h2>
+                    <button type="button" class="btn-add-photos" id="add-photos-btn">☁️ Adicionar fotos</button>
+                    <input type="file" id="photos-input" accept="image/*" multiple hidden>
                 </div>
 
-                <div class="dashboard-photo-grid">
-                    <div class="dash-photo-item">
-                        <img src="images/arquitetura.png" alt="Fachada de edifício moderno em São Paulo">
-                        <button type="button" class="btn-delete-photo" title="Excluir foto" aria-label="Excluir esta foto do portfólio"><span aria-hidden="true">🗑️</span></button>
-                    </div>
-                    <div class="dash-photo-item">
-                        <img src="images/paisagem2.png" alt="Paisagem natural ao entardecer">
-                        <button type="button" class="btn-delete-photo" title="Excluir foto" aria-label="Excluir esta foto do portfólio"><span aria-hidden="true">🗑️</span></button>
-                    </div>
-                    <div class="dash-photo-item">
-                        <img src="images/saopaulo3.png" alt="Cena urbana movimentada no centro de São Paulo">
-                        <button type="button" class="btn-delete-photo" title="Excluir foto" aria-label="Excluir esta foto do portfólio"><span aria-hidden="true">🗑️</span></button>
-                    </div>
-                    <div class="dash-photo-item">
-                        <img src="images/documental3.png" alt="Retrato documental em luz natural">
-                        <button type="button" class="btn-delete-photo" title="Excluir foto" aria-label="Excluir esta foto do portfólio"><span aria-hidden="true">🗑️</span></button>
-                    </div>
-                    <div class="dash-photo-item">
-                        <img src="images/saopaulo5.png" alt="Arquitetura histórica paulistana">
-                        <button type="button" class="btn-delete-photo" title="Excluir foto" aria-label="Excluir esta foto do portfólio"><span aria-hidden="true">🗑️</span></button>
-                    </div>
-                    <div class="dash-photo-item">
-                        <img src="images/saopaulo6.png" alt="Composição urbana em preto e branco">
-                        <button type="button" class="btn-delete-photo" title="Excluir foto" aria-label="Excluir esta foto do portfólio"><span aria-hidden="true">🗑️</span></button>
-                    </div>
-                </div>
+                <div class="dashboard-photo-grid" id="dash-grid"></div>
+                <p class="empty-state dark-text" id="dash-empty" hidden>Você ainda não adicionou fotos.</p>
             </section>
 
         </main>
 
-        <!-- PAINEL LATERAL DIREITO (MODAL DE EDIÇÃO) -->
-        <aside class="edit-profile-modal">
-            <h3>Editar Perfil</h3>
-            
-            <form class="edit-form">
+        <!-- PAINEL LATERAL DIREITO (EDIÇÃO) -->
+        <aside class="edit-profile-modal" id="edit-panel" aria-labelledby="edit-title" hidden>
+            <h2 id="edit-title">Editar Perfil</h2>
+
+            <form class="edit-form" id="edit-form">
                 <div class="form-group">
                     <label for="fullname">Nome completo *</label>
-                    <input type="text" id="fullname" value="Paulo Giovanni">
+                    <input type="text" id="fullname" name="fullname" required minlength="3" maxlength="60" autocomplete="name">
                 </div>
 
                 <div class="form-group">
-                    <label for="category">Categoria Principal *</label>
-                    <select id="category">
+                    <label for="category">Categoria principal *</label>
+                    <select id="category" name="category" required>
                         <option value="documental">Fotógrafo documental</option>
-                        <option value="retrato">Retrato</option>
-                        <option value="paisagem">Paisagem</option>
-                        <option value="arquitetura">Arquitetura</option>
+                        <option value="retrato">Fotógrafo de retrato</option>
+                        <option value="paisagem">Fotógrafo de paisagem</option>
+                        <option value="arquitetura">Fotógrafo de arquitetura</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Telefone / WhatsApp *</label>
-                    <input type="text" id="phone" value="(11) 98765-4321">
+                    <input type="tel" id="phone" name="phone" required
+                           pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}"
+                           placeholder="(11) 98765-4321" autocomplete="tel"
+                           title="Use o formato (11) 98765-4321">
                 </div>
 
                 <div class="form-group">
                     <label for="bio">Biografia *</label>
-                    <textarea id="bio" rows="5">Acredito que cada imagem carrega uma história que merece ser contada. Meu trabalho é registrar momentos reais, pessoas e lugares de forma autêntica e sensível.</textarea>
-                    <span class="char-count">168/500</span>
+                    <textarea id="bio" name="bio" rows="5" maxlength="500" required></textarea>
+                    <span class="char-count" id="char-count" aria-live="polite">0/500</span>
                 </div>
 
                 <div class="form-buttons">
-                    <button type="button" class="btn-cancel">Cancelar</button>
+                    <button type="button" class="btn-cancel" id="cancel-btn">Cancelar</button>
                     <button type="submit" class="btn-save">Salvar</button>
                 </div>
             </form>
         </aside>
 
     </div>
-
-    <script src="js/script.js"></script>
 
 </body>
 </html>

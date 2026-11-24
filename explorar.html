@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore fotógrafos de diferentes estilos e conheça seus portfólios no PhotoFrame.">
     <title>PhotoFrame - Explorar</title>
-    <meta name="description" content="Photoframe — Plataforma de portfólio e exibição para fotógrafos autorais.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📷%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
 </head>
-<body>
+<body class="page" data-page="explorar">
 
     <!-- CABEÇALHO SUPERIOR -->
     <header class="navbar">
         <div class="logo"><a href="index.html">PHOTOFRAME</a></div>
-        <nav class="nav-links">
+        <nav class="nav-links" aria-label="Menu principal">
             <a href="index.html">Início</a>
             <a href="explorar.html" class="active" aria-current="page">Explorar</a>
             <a href="dashboard.html">Meu Perfil</a>
@@ -26,41 +25,28 @@
         <!-- TÍTULO E FILTROS -->
         <section class="explore-header">
             <div>
-                <h2>Fotógrafos em destaque</h2>
+                <h1>Fotógrafos em destaque</h1>
                 <p>Conheça diferentes fotógrafos, estilos e histórias através da fotografia.</p>
             </div>
-            <div class="filter-pills" role="group" aria-label="Filtrar fotógrafos por categoria">
-                <button class="pill active">Todos</button>
-                <button class="pill">Retrato</button>
-                <button class="pill">Paisagem</button>
-                <button class="pill">Arquitetura</button>
+            <div class="explore-controls">
+                <input type="search" id="search" class="search-input" placeholder="Buscar fotógrafo..." aria-label="Buscar fotógrafo por nome" autocomplete="off">
+                <div class="filter-pills" role="group" aria-label="Filtrar por categoria">
+                    <button type="button" class="pill active" data-filter="todos" aria-pressed="true">Todos</button>
+                    <button type="button" class="pill" data-filter="documental" aria-pressed="false">Documental</button>
+                    <button type="button" class="pill" data-filter="retrato" aria-pressed="false">Retrato</button>
+                    <button type="button" class="pill" data-filter="paisagem" aria-pressed="false">Paisagem</button>
+                    <button type="button" class="pill" data-filter="arquitetura" aria-pressed="false">Arquitetura</button>
+                </div>
             </div>
         </section>
 
-        <!-- GRELHA DE FOTÓGRAFOS -->
-        <section class="photographers-grid">
-            <div class="card">
-                <img src="images/fotopaulo4.png" alt="Retrato artístico fotografado por Paulo Giovanni">
-                <h3>Paulo Giovanni</h3>
-                <p class="category">Retratos</p>
-                <a href="perfil.html" class="link-portfolio">Ver Portfólio</a>
-            </div>
-            <div class="card">
-                <img src="images/paisagem.png" alt="Fotografia de paisagem natural por Ana Costa">
-                <h3>Ana Costa</h3>
-                <p class="category">Paisagem</p>
-                <a href="perfil.html" class="link-portfolio">Ver Portfólio</a>
-            </div>
-            <div class="card">
-                <img src="images/arquitetura.png" alt="Fotografia de arquitetura contemporânea por Lucas Ferreira">
-                <h3>Lucas Ferreira</h3>
-                <p class="category">Arquitetura</p>
-                <a href="perfil.html" class="link-portfolio">Ver Portfólio</a>
-            </div>
-        </section>
+        <!-- GRADE DE FOTÓGRAFOS (preenchida pelo JavaScript) -->
+        <section class="photographers-grid" id="photographers-grid" aria-live="polite"></section>
 
-        <div class="load-more">
-            <button class="btn-outline">CARREGAR MAIS</button>
+        <p class="empty-state" id="empty-state" hidden>Nenhum fotógrafo encontrado para esse filtro.</p>
+
+        <div class="load-more" id="load-more" hidden>
+            <button type="button" class="btn-outline" id="load-more-btn">CARREGAR MAIS</button>
         </div>
     </main>
 
@@ -68,8 +54,6 @@
         <span>PHOTOFRAME</span>
         <span>&copy; 2026 PhotoFrame. Todos os direitos reservados.</span>
     </footer>
-
-    <script src="js/script.js"></script>
 
 </body>
 </html>

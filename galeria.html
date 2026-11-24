@@ -4,42 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhotoFrame - Imagem Expandida</title>
-    <meta name="description" content="Photoframe — Plataforma de portfólio e exibição para fotógrafos autorais.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📷%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
 </head>
-<body class="bg-black-view">
+<body class="bg-black-view" data-page="galeria">
 
     <header class="navbar navbar-dark">
         <div class="logo"><a href="index.html">PHOTOFRAME</a></div>
-    <a href="perfil.html" class="btn-close-gallery" 
-    aria-label="Fechar visualização expandida e voltar ao perfil">✕ Fechar
-    </a>
+        <nav class="nav-links" aria-label="Navegação da galeria">
+            <a href="perfil.html" id="back-to-profile">← Voltar ao perfil</a>
+        </nav>
     </header>
 
     <main class="lightbox-container">
-        <button class="nav-arrow left">&lt;</button>
+        <h1 class="sr-only">Galeria de fotos</h1>
+        <button type="button" class="nav-arrow left" id="prev-btn" aria-label="Foto anterior">&lt;</button>
 
         <div class="main-image-view">
-            <img src="images/fotopaulo1.png" alt="Imagem Expandida">
+            <img id="main-image" src="" alt="Imagem expandida">
+            <p class="empty-state" id="gallery-empty" hidden>Nenhuma foto para exibir.</p>
         </div>
 
-        <button class="nav-arrow right">&gt;</button>
+        <button type="button" class="nav-arrow right" id="next-btn" aria-label="Próxima foto">&gt;</button>
     </main>
 
     <div class="thumbnails-bar">
-        <div class="thumbs">
-            <img src="images/fotopaulo1.png" alt="thumb">
-            <img src="images/fotopaulo2.png" class="active-thumb" alt="thumb">
-            <img src="images/fotopaulo3.png" alt="thumb">
-            <img src="images/fotopaulo4.png" alt="thumb">
-        </div>
-        <span class="counter">03/12</span>
+        <div class="thumbs" id="thumbs"></div>
+        <span class="counter" id="counter" aria-live="polite">00/00</span>
     </div>
-
-    <script src="js/script.js"></script>
 
 </body>
 </html>
